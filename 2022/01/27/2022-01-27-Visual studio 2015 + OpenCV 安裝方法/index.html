@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Visual studio 2015 + OpenCV 安裝方法 | Show me the path</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="相關文章: 回顧過去這是一切的開端~ 前途無量OpenCV 繪圖基本指令  正文開始:這篇文章記錄了如何下載安裝OpenCV，並在Visual Studio 2015 設定編譯環境，最後試著在Visual studio 2015中運行一段程式碼，測試安裝是否成功。 依序需要完成  下載OpenCV 設定電腦環境變數  設定Viusual studio 2015 編譯環境 進行測試。  安裝環境作業">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Visual studio 2015 + OpenCV 安裝方法">
+<meta property="og:url" content="http://example.com/2022/01/27/2022-01-27-Visual%20studio%202015%20+%20OpenCV%20%E5%AE%89%E8%A3%9D%E6%96%B9%E6%B3%95/index.html">
+<meta property="og:site_name" content="Show me the path">
+<meta property="og:description" content="相關文章: 回顧過去這是一切的開端~ 前途無量OpenCV 繪圖基本指令  正文開始:這篇文章記錄了如何下載安裝OpenCV，並在Visual Studio 2015 設定編譯環境，最後試著在Visual studio 2015中運行一段程式碼，測試安裝是否成功。 依序需要完成  下載OpenCV 設定電腦環境變數  設定Viusual studio 2015 編譯環境 進行測試。  安裝環境作業">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2022-01-26T17:11:58.000Z">
+<meta property="article:modified_time" content="2022-01-26T16:00:00.000Z">
+<meta property="article:author" content="Jason_Tsai">
+<meta property="article:tag" content="OpenCV">
+<meta property="article:tag" content="開發函式庫">
+<meta property="article:tag" content="Visual studio 2015">
+<meta property="article:tag" content="安裝教學">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Show me the path</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首頁</a>
+        
+          <a class="main-nav-link" href="/about">關於本網站</a>
+        
+          <a class="main-nav-link" href="/archives">所有文章</a>
+        
+          <a class="main-nav-link" href="/tags">所有標籤</a>
+        
+          <a class="main-nav-link" href="/categories">所有分類</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜尋"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-2022-01-27-Visual studio 2015 + OpenCV 安裝方法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/01/27/2022-01-27-Visual%20studio%202015%20+%20OpenCV%20%E5%AE%89%E8%A3%9D%E6%96%B9%E6%B3%95/" class="article-date">
+  <time datetime="2022-01-26T17:11:58.000Z" itemprop="datePublished">2022-01-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Study-notes/">Study_notes</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Visual studio 2015 + OpenCV 安裝方法
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="相關文章"><a href="#相關文章" class="headerlink" title="相關文章:"></a>相關文章:</h1><ol>
+<li>回顧過去<br>這是一切的開端~</li>
+<li>前途無量<br><a href="">OpenCV 繪圖基本指令</a></li>
+</ol>
+<h1 id="正文開始"><a href="#正文開始" class="headerlink" title="正文開始:"></a>正文開始:</h1><p>這篇文章記錄了如何下載安裝OpenCV，並在Visual Studio 2015 設定編譯環境，最後試著在Visual studio 2015中運行一段程式碼，測試安裝是否成功。</p>
+<p>依序需要完成</p>
+<ol>
+<li>下載OpenCV</li>
+<li>設定電腦環境變數 </li>
+<li>設定Viusual studio 2015 編譯環境</li>
+<li>進行測試。</li>
+</ol>
+<h1 id="安裝環境"><a href="#安裝環境" class="headerlink" title="安裝環境"></a>安裝環境</h1><p>作業系統：Windows 10<br>開發工具：Visual Studio 2015<br>OpenCV版本：3.4.XX   (安裝位置為C:\opencv)</p>
+<h1 id="1-下載安裝OpenCV"><a href="#1-下載安裝OpenCV" class="headerlink" title="1.下載安裝OpenCV"></a>1.下載安裝OpenCV</h1><h2 id="下載"><a href="#下載" class="headerlink" title="下載"></a>下載</h2><p>到<a target="_blank" rel="noopener" href="https://opencv.org/">OpneCV官網</a>下載，官網的載點隨著網頁的更新可能會失效，這裡就不直接貼上載點連結，只需要記得找到Releases，然後下載適合你的作業系統的版本，會是一個exe檔。</p>
+<h2 id="安裝"><a href="#安裝" class="headerlink" title="安裝"></a>安裝</h2><p>執行exe安裝檔，可以安裝在電腦上任意位置，會產生一個opencv資料夾，裡面有build、sources資料夾等等。</p>
+<h1 id="2-設定電腦環境變數"><a href="#2-設定電腦環境變數" class="headerlink" title="2.設定電腦環境變數"></a>2.設定電腦環境變數</h1><ol>
+<li>   開啟檔案總管-對本機右鍵-內容-(右方)進階系統設定-進階頁籤-(下方)環境變數-使用者變數- path-編輯</li>
+<li>新增以下兩項資料：<br> C:\opencv\build\x64\vc14\bin<br> C:\opencv\build\x86\vc14\bin</li>
+</ol>
+<h1 id="3-設定Viusual-studio-2015-編譯環境"><a href="#3-設定Viusual-studio-2015-編譯環境" class="headerlink" title="3. 設定Viusual studio 2015 編譯環境"></a>3. 設定Viusual studio 2015 編譯環境</h1><ol>
+<li>   開啟 Visual Studio 2015 並且新增專案</li>
+<li>   於右方方案總管中，對專案點右鍵-屬性</li>
+<li>對「VC++目錄」與「連結器」進行調整<br>(1)在x64平台及所有組態下設定<br>VC++目錄 →在「Include目錄」增加”C:\opencv\build\include”<br> VC++目錄 →在「程式庫目錄」增加”C:\opencv\build\x64\vc14\lib”<br>(2)在x64及Release(或Debug)組態下設定<br>連結器 →「輸入」 →在「其他相依性」增加“opencv_world34XX.lib”(或“opencv_world34XXd.lib”)</li>
+</ol>
+<p>注意!選擇vc14還是vc15是依據你的visual studio版本來決定，甚至更舊visual studio 2013 等也對應不同的vcXX。<br>目前VC14和VC15與Visual studio的對應關係<br>Visual Studio 2015 ： vc14<br>Visual Studio 2017 ： vc15</p>
+<h1 id="4-測試程式碼"><a href="#4-測試程式碼" class="headerlink" title="4.測試程式碼"></a>4.測試程式碼</h1><p>功能:開啟圖檔，並以OpenCV的視窗顯示出來。<br>程式碼:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;opencv2/opencv.hpp&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> cv;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Mat originalImage = <span class="built_in">imread</span>(<span class="string">&quot;C:\\Users\\a2707\\Desktop\\S__19030095.jpg&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (originalImage.<span class="built_in">empty</span>())</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;fail to load image !&quot;</span> &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">namedWindow</span>(<span class="string">&quot;opencv test&quot;</span>, CV_WINDOW_AUTOSIZE);</span><br><span class="line">    <span class="built_in">imshow</span>(<span class="string">&quot;opencv test&quot;</span>, originalImage);</span><br><span class="line">    <span class="built_in">waitKey</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="說明"><a href="#說明" class="headerlink" title="說明:"></a>說明:</h2><ol>
+<li>其中<code>imread</code>中的引數為要開啟的圖檔路徑，是可以任意更換的，唯一要注意路徑中的”\”必須再加上一個跳脫字元”\”，形成<code>\\</code>。<br>例如: <code>C:\\Users\\a2707\\Desktop\\S__19030095.jpg</code>，此路徑指向了我的桌面上的一張圖檔。</li>
+<li><code>imshow</code>必須配合使用<code>waitKey</code>，給視窗繪製圖像的時間，<code>waitKey(int delay)</code>是等待delay微秒(delay=0 則會無限制地等待直到使用者輸入任意鍵)，在這期間若使用者按下按鍵就返回按鍵ASCII碼，若沒有按下任何按鍵則返回-1。</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/01/27/2022-01-27-Visual%20studio%202015%20+%20OpenCV%20%E5%AE%89%E8%A3%9D%E6%96%B9%E6%B3%95/" data-id="ckz2bd3880000c07kgph58v6b" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenCV/" rel="tag">OpenCV</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Visual-studio-2015/" rel="tag">Visual studio 2015</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AE%89%E8%A3%9D%E6%95%99%E5%AD%B8/" rel="tag">安裝教學</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%96%8B%E7%99%BC%E5%87%BD%E5%BC%8F%E5%BA%AB/" rel="tag">開發函式庫</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/01/28/2022-01-28-OpenCV%E7%B9%AA%E5%9C%96%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          OpenCV 繪圖基本指令
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分類</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Study-notes/">Study_notes</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標籤</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/GUI/" rel="tag">GUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenCV/" rel="tag">OpenCV</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Visual-studio-2015/" rel="tag">Visual studio 2015</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E8%A3%9D%E6%95%99%E5%AD%B8/" rel="tag">安裝教學</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%96%8B%E7%99%BC%E5%87%BD%E5%BC%8F%E5%BA%AB/" rel="tag">開發函式庫</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/01/28/2022-01-28-OpenCV%E7%B9%AA%E5%9C%96%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4/">OpenCV 繪圖基本指令</a>
+          </li>
+        
+          <li>
+            <a href="/2022/01/27/2022-01-27-Visual%20studio%202015%20+%20OpenCV%20%E5%AE%89%E8%A3%9D%E6%96%B9%E6%B3%95/">Visual studio 2015 + OpenCV 安裝方法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 Jason_Tsai<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首頁</a>
+  
+    <a href="/about" class="mobile-nav-link">關於本網站</a>
+  
+    <a href="/archives" class="mobile-nav-link">所有文章</a>
+  
+    <a href="/tags" class="mobile-nav-link">所有標籤</a>
+  
+    <a href="/categories" class="mobile-nav-link">所有分類</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
