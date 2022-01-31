@@ -112,9 +112,9 @@
 <h1 id="1-直線"><a href="#1-直線" class="headerlink" title="1.直線:"></a>1.直線:</h1><h2 id="函式原型"><a href="#函式原型" class="headerlink" title="函式原型:"></a>函式原型:</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">line</span><span class="params">(InputOutputArray img, Point pt1, Point pt2, <span class="keyword">const</span> Scalar&amp; color,</span></span></span><br><span class="line"><span class="params"><span class="function">          <span class="keyword">int</span> thickness = <span class="number">1</span>, <span class="keyword">int</span> lineType = LINE_8, <span class="keyword">int</span> shift = <span class="number">0</span>)</span></span>;</span><br></pre></td></tr></table></figure>
 <h2 id="範例"><a href="#範例" class="headerlink" title="範例:"></a>範例:</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">line</span>(img, <span class="built_in">Point</span>(<span class="number">20</span>, <span class="number">40</span>), <span class="built_in">Point</span>(<span class="number">120</span>, <span class="number">140</span>), <span class="built_in">Scalar</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>), <span class="number">3</span>);</span><br></pre></td></tr></table></figure>
 <h2 id="說明"><a href="#說明" class="headerlink" title="說明:"></a>說明:</h2><ol>
-<li>   第一個引數是要畫的影像檔</li>
-<li>   第二個引數是線的起點座標</li>
-<li>   第三個引數是線的終點</li>
+<li>第一個引數是要畫的影像檔<br> (InputArray這個類型可以是Mat、Mat_<T>、Mat_&lt;T, m, n&gt;、vector<T>、vector&lt;vector<T>&gt;、vector<Mat>)</li>
+<li>   第二個引數是線的起點座標(X,Y)</li>
+<li>   第三個引數是線的終點座標(X,Y)</li>
 <li>   第四個引數是顏色</li>
 <li>   第五個引數是寬度</li>
 <li>   第六個引數是線條型式</li>
@@ -123,10 +123,11 @@
 <h1 id="2-矩形"><a href="#2-矩形" class="headerlink" title="2.矩形:"></a>2.矩形:</h1><h2 id="函式原型-1"><a href="#函式原型-1" class="headerlink" title="函式原型:"></a>函式原型:</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">rectangle</span><span class="params">(CV_IN_OUT Mat&amp; img, Rect rec,<span class="keyword">const</span> Scalar&amp; color,</span></span></span><br><span class="line"><span class="params"><span class="function">              <span class="keyword">int</span> thickness = <span class="number">1</span>,<span class="keyword">int</span> lineType = LINE_8, <span class="keyword">int</span> shift = <span class="number">0</span>)</span></span>;</span><br></pre></td></tr></table></figure>
 <h2 id="範例-1"><a href="#範例-1" class="headerlink" title="範例:"></a>範例:</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rectangle</span>(img, <span class="built_in">Point</span>(<span class="number">150</span>, <span class="number">40</span>), <span class="built_in">Point</span>(<span class="number">250</span>,<span class="number">800</span>), <span class="built_in">Scalar</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>), <span class="number">5</span>);</span><br></pre></td></tr></table></figure>
 <h2 id="說明-1"><a href="#說明-1" class="headerlink" title="說明:"></a>說明:</h2><ol>
+<li>   於函式原型中的Rect是OpneCV中標定特地方型區域的類別。</li>
+<li>   使用rectangle函式時，可採用指定Rect物件，也可以採用指定矩形座標的方式(如範例及說明 3 4 點)。</li>
 <li>   第二個引數是矩形的左上點座標。</li>
 <li>   第三個引數是矩形的右下點座標。</li>
 <li>   第五個引數是矩形的邊線寬度，若是填入負值，會讓矩形被填滿。<br>若是填入的矩形範圍比線的寬度還來的小，依舊可以顯示，但效果仍不太確定。</li>
-<li>   其餘與直線相似。</li>
 </ol>
 <h1 id="3-圓形"><a href="#3-圓形" class="headerlink" title="3.圓形:"></a>3.圓形:</h1><h2 id="函式原型-2"><a href="#函式原型-2" class="headerlink" title="函式原型:"></a>函式原型:</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">circle</span><span class="params">(InputOutputArray img, Point center, <span class="keyword">int</span> radius,<span class="keyword">const</span> Scalar&amp; color,</span></span></span><br><span class="line"><span class="params"><span class="function">           <span class="keyword">int</span> thickness = <span class="number">1</span>,<span class="keyword">int</span> lineType = LINE_8, <span class="keyword">int</span> shift = <span class="number">0</span>)</span></span>;</span><br></pre></td></tr></table></figure>
 <h2 id="範例-2"><a href="#範例-2" class="headerlink" title="範例:"></a>範例:</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">circle</span>(img, <span class="built_in">Point</span>(<span class="number">330</span>, <span class="number">90</span>), <span class="number">50</span>, <span class="built_in">Scalar</span>(<span class="number">0</span>, <span class="number">255</span>, <span class="number">0</span>), <span class="number">-1</span>);</span><br></pre></td></tr></table></figure>
@@ -157,7 +158,9 @@
 <li>   第七個引數控制線條寬度。</li>
 <li>   第八個引數控制線條的形式，可以參考:</li>
 </ol>
-<p>Rect矩形類別<br>用於定義出圖像中特定區域，可以用於對特定區域做變化。<br>可以參考:<br><a target="_blank" rel="noopener" href="https://www.itread01.com/content/1547177430.html">https://www.itread01.com/content/1547177430.html</a></p>
+<h1 id="補充資料"><a href="#補充資料" class="headerlink" title="補充資料"></a>補充資料</h1><p><a target="_blank" rel="noopener" href="https://www.itread01.com/content/1547177430.html">Rect矩形類別</a><br>用於定義出圖像中特定區域，可以用於對特定區域做變化。</p>
+<p>[OpenCV字型]<a target="_blank" rel="noopener" href="https://www.itread01.com/content/1548225390.html">https://www.itread01.com/content/1548225390.html</a></p>
+<p>[OpneCV中對顏色的定義]</p>
 
       
     </div>
@@ -173,10 +176,19 @@
     
 <nav id="article-nav">
   
+    <a href="/2022/01/31/2022-01-31-OpneCV%E8%A6%96%E7%AA%97%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          2022-01-31-OpneCV視窗基本指令
+        
+      </div>
+    </a>
   
-    <a href="/2022/01/27/2022-01-27-Visual%20studio%202015%20+%20OpenCV%20%E5%AE%89%E8%A3%9D%E6%96%B9%E6%B3%95/" id="article-nav-older" class="article-nav-link-wrap">
+  
+    <a href="/2022/01/27/2022-01-27-Visual-studio-2015-OpenCV-%E5%AE%89%E8%A3%9D%E6%96%B9%E6%B3%95/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Visual studio 2015 + OpenCV 安裝方法</div>
+      <div class="article-nav-title">Visual_studio_2015+OpenCV_安裝方法</div>
     </a>
   
 </nav>
@@ -215,11 +227,15 @@
       <ul>
         
           <li>
+            <a href="/2022/01/31/2022-01-31-OpneCV%E8%A6%96%E7%AA%97%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4/">2022-01-31-OpneCV視窗基本指令</a>
+          </li>
+        
+          <li>
             <a href="/2022/01/28/2022-01-28-OpenCV%E7%B9%AA%E5%9C%96%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4/">OpenCV 繪圖基本指令</a>
           </li>
         
           <li>
-            <a href="/2022/01/27/2022-01-27-Visual%20studio%202015%20+%20OpenCV%20%E5%AE%89%E8%A3%9D%E6%96%B9%E6%B3%95/">Visual studio 2015 + OpenCV 安裝方法</a>
+            <a href="/2022/01/27/2022-01-27-Visual-studio-2015-OpenCV-%E5%AE%89%E8%A3%9D%E6%96%B9%E6%B3%95/">Visual_studio_2015+OpenCV_安裝方法</a>
           </li>
         
       </ul>
