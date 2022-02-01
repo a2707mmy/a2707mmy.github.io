@@ -93,8 +93,56 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="相關文章"><a href="#相關文章" class="headerlink" title="相關文章:"></a>相關文章:</h1><ol>
-<li>回顧過去<br><a target="_blank" rel="noopener" href="https://a2707mmy.github.io/2022/01/27/Visual%20studio%202015%20+%20OpenCV%20%E5%AE%89%E8%A3%9D%E6%96%B9%E6%B3%95/">Visual studio 2015 + OpenCV 安裝方法</a></li>
-<li>前途無量<a href="#">Post not found: 2022-01-27-Visual studio 2015 + OpenCV 安裝方法 点击这里查看这篇文章</a></li>
+<li>回顧過去<br><a href="">Visual studio 2015 + OpenCV 安裝方法</a></li>
+<li>前途無量</li>
+</ol>
+<h1 id="正文開始"><a href="#正文開始" class="headerlink" title="正文開始:"></a>正文開始:</h1><p>本篇文章紀錄OpenCV中視窗相關的函式，你可以在這篇文章中學到以下內容</p>
+<ol>
+<li>創造視窗-namewindow</li>
+<li>變更視窗大小-resizeWindow</li>
+<li>關閉視窗-destroyWindow、destroyAllWindows</li>
+<li>移動視窗-moveWindow</li>
+<li>暫停視窗-cvwaitkey、waitKey</li>
+<li>顯示圖檔於視窗-imshow</li>
+<li>監測滑鼠於視窗的動作-setMouseCallback、callbackfuntion</li>
+</ol>
+<p>食用案例?<br>食用上遇到的問題</p>
+<h1 id="1-創造視窗"><a href="#1-創造視窗" class="headerlink" title="1.創造視窗:"></a>1.創造視窗:</h1><h2 id="函式原型"><a href="#函式原型" class="headerlink" title="函式原型:"></a>函式原型:</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">namedWindow</span><span class="params">(<span class="keyword">const</span> String&amp; winname, <span class="keyword">int</span> flags = WINDOW_AUTOSIZE)</span></span>;</span><br></pre></td></tr></table></figure>
+<h2 id="範例"><a href="#範例" class="headerlink" title="範例:"></a>範例:</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">namedWindow</span>(<span class="string">&quot;drawline&quot;</span>, WINDOW_AUTOSIZE);</span><br></pre></td></tr></table></figure>
+<h2 id="說明"><a href="#說明" class="headerlink" title="說明:"></a>說明:</h2><ol>
+<li>第一個引數是視窗標題。</li>
+<li>第二個引數是”視窗標誌”，使用WINDOW_AUTOSIZE，視窗大小會和放進去的mat物件一樣，並且不能改變。若是使用WINDOW_NORMAL，其大小可以改變。CV_WINDOW_OPENGL適用於OpenGL程式庫。</li>
+<li>若已經存在相同標題的視窗，則此函式不做任何動作。</li>
+</ol>
+<h1 id="2-變更視窗大小"><a href="#2-變更視窗大小" class="headerlink" title="2.變更視窗大小"></a>2.變更視窗大小</h1><h2 id="函式原型-1"><a href="#函式原型-1" class="headerlink" title="函式原型:"></a>函式原型:</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">resizeWindow</span><span class="params">(<span class="keyword">const</span> String&amp; winname, <span class="keyword">int</span> width, <span class="keyword">int</span> height)</span></span>;</span><br></pre></td></tr></table></figure>
+<h2 id="範例-1"><a href="#範例-1" class="headerlink" title="範例:"></a>範例:</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">resizeWindow</span>(<span class="string">&quot;drawline&quot;</span>,<span class="number">300</span>,<span class="number">500</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="說明-1"><a href="#說明-1" class="headerlink" title="說明:"></a>說明:</h2><ol>
+<li>第一個引數是視窗標題。</li>
+<li>第二個引數是視窗寬度。</li>
+<li>第三個引數是視窗高度。</li>
+</ol>
+<h1 id="3-關閉視窗"><a href="#3-關閉視窗" class="headerlink" title="3.關閉視窗"></a>3.關閉視窗</h1><h2 id="函式原型-2"><a href="#函式原型-2" class="headerlink" title="函式原型:"></a>函式原型:</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">destroyWindow</span><span class="params">(<span class="keyword">const</span> String&amp; winname)</span></span>;</span><br></pre></td></tr></table></figure>
+<h2 id="範例-2"><a href="#範例-2" class="headerlink" title="範例:"></a>範例:</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">destroyWindow</span>(<span class="string">&quot;drawline&quot;</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="說明-2"><a href="#說明-2" class="headerlink" title="說明:"></a>說明:</h2><ol>
+<li>第一個引數是視窗標題。</li>
+<li>使用destroyAllWindows()可以關閉所有視窗。</li>
+<li>視窗會自主程式結束時自動關閉並釋放資源，因此此函式主要是提供結構相對複雜的程式，以此函式提前主動關閉視窗並釋放資源。</li>
+</ol>
+<h1 id="6-顯示圖檔於視窗"><a href="#6-顯示圖檔於視窗" class="headerlink" title="6.顯示圖檔於視窗:"></a>6.顯示圖檔於視窗:</h1><h2 id="函式原型-3"><a href="#函式原型-3" class="headerlink" title="函式原型:"></a>函式原型:</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">imshow</span><span class="params">(<span class="keyword">const</span> String&amp; winname, InputArray mat)</span></span>;</span><br></pre></td></tr></table></figure>
+<h2 id="範例-3"><a href="#範例-3" class="headerlink" title="範例:"></a>範例:</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">imshow</span>(<span class="string">&quot;drawline&quot;</span>, img);</span><br></pre></td></tr></table></figure>
+<h2 id="說明-3"><a href="#說明-3" class="headerlink" title="說明:"></a>說明:</h2><ol>
+<li>第一個引數是圖片要放入的視窗名稱。</li>
+<li>第二個引數是要放進的圖像。</li>
+<li>使用此函式來將圖像放入視窗顯示必須接cvwaitkey、waitKey函式，用意是給視窗反應時間。否則視窗會卡死且無法顯示圖像。</li>
+</ol>
+<h1 id="5-暫停執行程序"><a href="#5-暫停執行程序" class="headerlink" title="5.暫停執行程序:"></a>5.暫停執行程序:</h1><h2 id="函式原型-4"><a href="#函式原型-4" class="headerlink" title="函式原型:"></a>函式原型:</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">waitKey</span><span class="params">(<span class="keyword">int</span> delay = <span class="number">0</span>)</span></span>;</span><br></pre></td></tr></table></figure>
+<h2 id="範例-4"><a href="#範例-4" class="headerlink" title="範例:"></a>範例:</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">waitKey</span>(<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="說明-4"><a href="#說明-4" class="headerlink" title="說明:"></a>說明:</h2><ol>
+<li>此函式將會暫停視窗delay毫秒(ms)，並偵測使用者在視窗啟用狀況按下的鍵盤按鍵。</li>
+<li>delay&lt;=0，則會無窮等待直到使用者按下按鍵。</li>
+<li>delay&gt;0，則會等待delay毫秒後繼續執行。</li>
+<li>若於等待期間沒有偵測到任何按鍵，則返回-1。若有則反回該按鍵的ASCII碼。</li>
+<li>此函式於應用上，可以達到以Enter暫停視窗，以ESC關閉視窗等功用，詳細參考其他文章。</li>
 </ol>
 
       
@@ -139,16 +187,16 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="相關文章"><a href="#相關文章" class="headerlink" title="相關文章:"></a>相關文章:</h1><ol>
-<li>回顧過去<br><a target="_blank" rel="noopener" href="https://a2707mmy.github.io/2022/01/27/Visual%20studio%202015%20+%20OpenCV%20%E5%AE%89%E8%A3%9D%E6%96%B9%E6%B3%95/">Visual studio 2015 + OpenCV 安裝方法</a></li>
+<li>回顧過去<br><a href="">Visual studio 2015 + OpenCV 安裝方法</a></li>
 <li>前途無量</li>
 </ol>
-<h1 id="正文開始"><a href="#正文開始" class="headerlink" title="正文開始:"></a>正文開始:</h1><p>##(Mat還是一般array都可以?)<br>本篇文章紀錄OpenCV中於圖像中繪圖的基本函式。你可以在這篇文章中學到以下幾種</p>
+<h1 id="正文開始"><a href="#正文開始" class="headerlink" title="正文開始:"></a>正文開始:</h1><p>本篇文章紀錄OpenCV中於圖像中繪圖的基本函式。你可以在這篇文章中學到以下內容</p>
 <ol>
-<li>直線</li>
-<li>矩形</li>
-<li>圓形</li>
-<li>多邊形</li>
-<li>寫字</li>
+<li>畫直線-line</li>
+<li>畫矩形-rectangle</li>
+<li>畫圓形-circle</li>
+<li>畫多邊形-polylines</li>
+<li>寫字-putText</li>
 </ol>
 <h1 id="1-直線"><a href="#1-直線" class="headerlink" title="1.直線:"></a>1.直線:</h1><h2 id="函式原型"><a href="#函式原型" class="headerlink" title="函式原型:"></a>函式原型:</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">line</span><span class="params">(InputOutputArray img, Point pt1, Point pt2, <span class="keyword">const</span> Scalar&amp; color,</span></span></span><br><span class="line"><span class="params"><span class="function">          <span class="keyword">int</span> thickness = <span class="number">1</span>, <span class="keyword">int</span> lineType = LINE_8, <span class="keyword">int</span> shift = <span class="number">0</span>)</span></span>;</span><br></pre></td></tr></table></figure>
 <h2 id="範例"><a href="#範例" class="headerlink" title="範例:"></a>範例:</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">line</span>(img, <span class="built_in">Point</span>(<span class="number">20</span>, <span class="number">40</span>), <span class="built_in">Point</span>(<span class="number">120</span>, <span class="number">140</span>), <span class="built_in">Scalar</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>), <span class="number">3</span>);</span><br></pre></td></tr></table></figure>
@@ -236,7 +284,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/jasonblog/509bb444.html">Visual_studio_2015+OpenCV_安裝方法</a>
+      <a class="article-title" href="/jasonblog/509bb444.html">Visual Studio 2015+OpenCV_安裝方法</a>
     </h1>
   
 
@@ -332,7 +380,7 @@
           </li>
         
           <li>
-            <a href="/jasonblog/509bb444.html">Visual_studio_2015+OpenCV_安裝方法</a>
+            <a href="/jasonblog/509bb444.html">Visual Studio 2015+OpenCV_安裝方法</a>
           </li>
         
       </ul>
