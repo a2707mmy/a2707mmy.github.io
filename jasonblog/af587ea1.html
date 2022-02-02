@@ -14,8 +14,8 @@
 <meta property="og:site_name" content="Show me the path">
 <meta property="og:description" content="相關文章: 回顧過去Visual studio 2015 + OpenCV 安裝方法 前途無量  正文開始:本篇文章紀錄OpenCV中視窗相關的函式，你可以在這篇文章中學到以下內容  創造視窗-namewindow 變更視窗大小-resizeWindow 關閉視窗-destroyWindow、destroyAllWindows 移動視窗-moveWindow 暫停視窗-cvwaitkey、wait">
 <meta property="og:locale" content="zh_TW">
-<meta property="article:published_time" content="2022-01-31T13:34:58.000Z">
-<meta property="article:modified_time" content="2022-01-30T16:00:00.000Z">
+<meta property="article:published_time" content="2022-02-02T13:34:58.000Z">
+<meta property="article:modified_time" content="2022-02-02T13:34:58.000Z">
 <meta property="article:author" content="Jason_Tsai">
 <meta property="article:tag" content="OpenCV">
 <meta property="article:tag" content="開發函式庫">
@@ -74,7 +74,7 @@
         <section id="main"><article id="post-2022-01-31-OpneCV視窗基本指令" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/jasonblog/af587ea1.html" class="article-date">
-  <time datetime="2022-01-31T13:34:58.000Z" itemprop="datePublished">2022-01-31</time>
+  <time datetime="2022-02-02T13:34:58.000Z" itemprop="datePublished">2022-02-02</time>
 </a>
     
   <div class="article-category">
@@ -111,7 +111,6 @@
 <li>顯示圖檔於視窗-imshow</li>
 <li>監測滑鼠於視窗的動作-setMouseCallback、callbackfuntion</li>
 </ol>
-<p>食用案例?<br>食用上遇到的問題</p>
 <h1 id="1-創造視窗"><a href="#1-創造視窗" class="headerlink" title="1.創造視窗:"></a>1.創造視窗:</h1><h2 id="函式原型"><a href="#函式原型" class="headerlink" title="函式原型:"></a>函式原型:</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">namedWindow</span><span class="params">(<span class="keyword">const</span> String&amp; winname, <span class="keyword">int</span> flags = WINDOW_AUTOSIZE)</span></span>;</span><br></pre></td></tr></table></figure>
 <h2 id="範例"><a href="#範例" class="headerlink" title="範例:"></a>範例:</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">namedWindow</span>(<span class="string">&quot;drawline&quot;</span>, WINDOW_AUTOSIZE);</span><br></pre></td></tr></table></figure>
 <h2 id="說明"><a href="#說明" class="headerlink" title="說明:"></a>說明:</h2><ol>
@@ -126,19 +125,20 @@
 <li>第二個引數是視窗寬度。</li>
 <li>第三個引數是視窗高度。</li>
 </ol>
-<h1 id="3-關閉視窗"><a href="#3-關閉視窗" class="headerlink" title="3.關閉視窗"></a>3.關閉視窗</h1><h2 id="函式原型-2"><a href="#函式原型-2" class="headerlink" title="函式原型:"></a>函式原型:</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">destroyWindow</span><span class="params">(<span class="keyword">const</span> String&amp; winname)</span></span>;</span><br></pre></td></tr></table></figure>
-<h2 id="範例-2"><a href="#範例-2" class="headerlink" title="範例:"></a>範例:</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">destroyWindow</span>(<span class="string">&quot;drawline&quot;</span>);</span><br></pre></td></tr></table></figure>
+<h1 id="3-關閉視窗"><a href="#3-關閉視窗" class="headerlink" title="3.關閉視窗"></a>3.關閉視窗</h1><h2 id="函式原型-2"><a href="#函式原型-2" class="headerlink" title="函式原型:"></a>函式原型:</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">destroyWindow</span><span class="params">(<span class="keyword">const</span> String&amp; winname)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">destroyAllWindows</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+<h2 id="範例-2"><a href="#範例-2" class="headerlink" title="範例:"></a>範例:</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">destroyWindow</span>(<span class="string">&quot;drawline&quot;</span>);</span><br><span class="line"><span class="built_in">destroyAllWindows</span>();</span><br></pre></td></tr></table></figure>
 <h2 id="說明-2"><a href="#說明-2" class="headerlink" title="說明:"></a>說明:</h2><ol>
 <li>第一個引數是視窗標題。</li>
 <li>使用destroyAllWindows()可以關閉所有視窗。</li>
 <li>視窗會自主程式結束時自動關閉並釋放資源，因此此函式主要是提供結構相對複雜的程式，以此函式提前主動關閉視窗並釋放資源。</li>
 </ol>
-<h1 id="6-顯示圖檔於視窗"><a href="#6-顯示圖檔於視窗" class="headerlink" title="6.顯示圖檔於視窗:"></a>6.顯示圖檔於視窗:</h1><h2 id="函式原型-3"><a href="#函式原型-3" class="headerlink" title="函式原型:"></a>函式原型:</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">imshow</span><span class="params">(<span class="keyword">const</span> String&amp; winname, InputArray mat)</span></span>;</span><br></pre></td></tr></table></figure>
-<h2 id="範例-3"><a href="#範例-3" class="headerlink" title="範例:"></a>範例:</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">imshow</span>(<span class="string">&quot;drawline&quot;</span>, img);</span><br></pre></td></tr></table></figure>
+<h1 id="4-移動視窗"><a href="#4-移動視窗" class="headerlink" title="4.移動視窗"></a>4.移動視窗</h1><h2 id="函式原型-3"><a href="#函式原型-3" class="headerlink" title="函式原型:"></a>函式原型:</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">moveWindow</span><span class="params">(<span class="keyword">const</span> String&amp; winname, <span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span>;</span><br></pre></td></tr></table></figure>
+<h2 id="範例-3"><a href="#範例-3" class="headerlink" title="範例:"></a>範例:</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">moveWindow</span>(<span class="string">&quot;drawline&quot;</span>,<span class="number">300</span>,<span class="number">500</span>);</span><br></pre></td></tr></table></figure>
 <h2 id="說明-3"><a href="#說明-3" class="headerlink" title="說明:"></a>說明:</h2><ol>
-<li>第一個引數是圖片要放入的視窗名稱。</li>
-<li>第二個引數是要放進的圖像。</li>
-<li>使用此函式來將圖像放入視窗顯示必須接cvwaitkey、waitKey函式，用意是給視窗反應時間。否則視窗會卡死且無法顯示圖像。</li>
+<li>第一個引數是視窗標題。</li>
+<li>第二個引數是視窗左上角的X座標。</li>
+<li>第三個引數是視窗左上角的Y視窗。</li>
+<li>OpenCV認定座標原點是螢幕左上角，X座標由左而右增加，Y座標由上而下增加。</li>
 </ol>
 <h1 id="5-暫停執行程序"><a href="#5-暫停執行程序" class="headerlink" title="5.暫停執行程序:"></a>5.暫停執行程序:</h1><h2 id="函式原型-4"><a href="#函式原型-4" class="headerlink" title="函式原型:"></a>函式原型:</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">waitKey</span><span class="params">(<span class="keyword">int</span> delay = <span class="number">0</span>)</span></span>;</span><br></pre></td></tr></table></figure>
 <h2 id="範例-4"><a href="#範例-4" class="headerlink" title="範例:"></a>範例:</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">waitKey</span>(<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
@@ -147,7 +147,22 @@
 <li>delay&lt;=0，則會無窮等待直到使用者按下按鍵。</li>
 <li>delay&gt;0，則會等待delay毫秒後繼續執行。</li>
 <li>若於等待期間沒有偵測到任何按鍵，則返回-1。若有則反回該按鍵的ASCII碼。</li>
-<li>此函式於應用上，可以達到以Enter暫停視窗，以ESC關閉視窗等功用，詳細參考其他文章。</li>
+<li>此函式於應用上，可以達到以Enter暫停視窗，以ESC關閉視窗等功用，如下範例。<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> inputkey;</span><br><span class="line"><span class="keyword">while</span>(<span class="literal">true</span>)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="built_in">imshow</span>(<span class="string">&quot;drawline&quot;</span>,img);</span><br><span class="line">  inputkey=<span class="built_in">waitKey</span>(<span class="number">1</span>);</span><br><span class="line">  <span class="keyword">if</span> (inputkey == <span class="number">27</span>) &#123;</span><br><span class="line">      <span class="built_in">destroyWindow</span>(<span class="string">&quot;drawline&quot;</span>);</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">  &#125;</span><br><span class="line">	<span class="keyword">if</span> (inputkey == <span class="number">13</span>) <span class="built_in">cvWaitKey</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="6-顯示圖檔於視窗"><a href="#6-顯示圖檔於視窗" class="headerlink" title="6.顯示圖檔於視窗:"></a>6.顯示圖檔於視窗:</h1><h2 id="函式原型-5"><a href="#函式原型-5" class="headerlink" title="函式原型:"></a>函式原型:</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">imshow</span><span class="params">(<span class="keyword">const</span> String&amp; winname, InputArray mat)</span></span>;</span><br></pre></td></tr></table></figure>
+<h2 id="範例-5"><a href="#範例-5" class="headerlink" title="範例:"></a>範例:</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">imshow</span>(<span class="string">&quot;drawline&quot;</span>, img);</span><br></pre></td></tr></table></figure>
+<h2 id="說明-5"><a href="#說明-5" class="headerlink" title="說明:"></a>說明:</h2><ol>
+<li>第一個引數是圖片要放入的視窗名稱。</li>
+<li>第二個引數是要放進的圖像。</li>
+<li>使用此函式來將圖像放入視窗顯示必須接cvwaitkey、waitKey函式，用意是給視窗反應時間。否則視窗會卡死且無法顯示圖像。</li>
+</ol>
+<h1 id="4-監測滑鼠於視窗的動作"><a href="#4-監測滑鼠於視窗的動作" class="headerlink" title="4.監測滑鼠於視窗的動作"></a>4.監測滑鼠於視窗的動作</h1><h2 id="函式原型-6"><a href="#函式原型-6" class="headerlink" title="函式原型:"></a>函式原型:</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setMouseCallback</span><span class="params">(<span class="keyword">const</span> String&amp; winname, MouseCallback onMouse, <span class="keyword">void</span>* userdata = <span class="number">0</span>)</span></span>;</span><br></pre></td></tr></table></figure>
+<h2 id="範例-6"><a href="#範例-6" class="headerlink" title="範例:"></a>範例:</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> number;</span><br><span class="line"><span class="built_in">setMouseCallback</span>(<span class="string">&quot;drawline&quot;</span>, callbackfunction, &amp;number);</span><br><span class="line"><span class="built_in">callbackfunction</span>(<span class="keyword">int</span> event, <span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> flags, <span class="keyword">void</span>* userdata)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">int</span> *data = (<span class="keyword">int</span> *)userdata;</span><br><span class="line">  <span class="keyword">if</span> (event == EVENT_MOUSEMOVE)</span><br><span class="line">  &#123;</span><br><span class="line">    dosomething;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (event == EVENT_LBUTTONDOWN)</span><br><span class="line">  &#123;</span><br><span class="line">    dosomething;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (flags == EVENT_FLAG_CTRLKEY)</span><br><span class="line">  &#123;</span><br><span class="line">    dosomething;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="說明-6"><a href="#說明-6" class="headerlink" title="說明:"></a>說明:</h2><ol>
+<li><code>setMouseCallback</code>對指定視窗用引數<code>callbackfunction</code>函式開始偵測滑鼠的動作。</li>
+<li>引數2的<code>callbackfunction</code>為使用者必須自行宣告的函式，但函式傳入的引數必須為<code>(int event, int x, int y, int flags, void* userdata)</code>，原因是OpenCV背後其實會將此函式轉換為<code>*MouseCallback</code>的型態，而這些引數是必須的。</li>
+<li><code>callbackfunction</code>中的event和flags分別對應MouseEventTypes和MouseEventFlags，分別對應滑鼠的各種不同動作，可參考OpenCV函式庫來使用。</li>
+<li><code>setMouseCallback</code>中的引數3可以是任意型態資料的指標，傳入callbackfunction後再轉回對應的資料型態。範例中傳入的是<code>int</code>，實際應用上使用者可以傳入自己定義的class類別資料型態，透過類別的包裝來裝載各式資料。</li>
 </ol>
 
       
