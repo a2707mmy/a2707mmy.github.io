@@ -198,7 +198,7 @@ body {
   margin-bottom: 1em;
   margin-left: 5px;
   line-height: 1em;
-  text-shadow: 0 1px #fff;
+  text-shadow: 0 0px #fff;
   font-weight: bold;
 }
 .article-inner,
@@ -1113,8 +1113,8 @@ a.article-title:hover {
   font-family: "Source Code Pro", Consolas, Monaco, Menlo, Consolas, monospace;
 }
 .article-entry code {
-  background: #222;
-  text-shadow: 0 1px #fff;
+  background: #f0f0f0;
+  text-shadow: 0 0px #fff;
   padding: 0 0.3em;
 }
 .article-entry pre code {
