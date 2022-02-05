@@ -66,6 +66,96 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-2022-02-05-OpneCV圖像格式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/jasonblog/c19cf1dd.html" class="article-date">
+  <time datetime="2022-02-04T16:00:00.000Z" itemprop="datePublished">2022-02-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Study-notes/">Study_notes</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/jasonblog/c19cf1dd.html">2022-02-05-OpneCV圖像格式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="相關文章"><a href="#相關文章" class="headerlink" title="相關文章:"></a>相關文章:</h1><h1 id="正文開始"><a href="#正文開始" class="headerlink" title="正文開始:"></a>正文開始:</h1><p>本篇文章記錄OpenCV中的Mat物件，及讀取圖像、輸出圖像及獲取特定像素的RGB資料的方式。<br>在注重圖像格式的時刻詳細的了解Mat物件的各項屬性及前述內容，有助於讓使用者精確的操作圖像及像素。<br>你可以在這篇文章中學到以下內容</p>
+<ol>
+<li>Mat物件</li>
+<li>imread</li>
+<li>imwrite</li>
+<li>獲取特定像素的RGB資料</li>
+</ol>
+<h1 id="1-Mat物件"><a href="#1-Mat物件" class="headerlink" title="1.Mat物件"></a>1.Mat物件</h1><h2 id="一、宣告方式"><a href="#一、宣告方式" class="headerlink" title="一、宣告方式:"></a>一、宣告方式:</h2><h3 id="函數原型"><a href="#函數原型" class="headerlink" title="函數原型:"></a>函數原型:</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Mat <span class="title">img</span><span class="params">(<span class="keyword">int</span> rows, <span class="keyword">int</span> cols, <span class="keyword">int</span> type,Scalar)</span></span></span><br><span class="line"><span class="function">Mat <span class="title">img</span><span class="params">(<span class="keyword">int</span> rows, <span class="keyword">int</span> cols, <span class="keyword">int</span> type, <span class="keyword">void</span>* data,</span></span></span><br><span class="line"><span class="params"><span class="function">        <span class="keyword">size_t</span> step=AUTO_STEP)</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="範例"><a href="#範例" class="headerlink" title="範例:"></a>範例:</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Mat <span class="title">img</span><span class="params">(<span class="number">5</span>,<span class="number">10</span>,CV_8UC3,Scalar(<span class="number">255</span>,<span class="number">100</span> ,<span class="number">0</span>))</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="說明"><a href="#說明" class="headerlink" title="說明:"></a>說明:</h3><ol>
+<li>範例中像素為5列10行的陣列(實際上為1行連續的陣列)，CV_8UC3代表每個像素由3個數值所構成，每個數值為8位元無符號的整數，Scalar代表這像素陣列的每個像素的三個數值分別設定為255、100、0。</li>
+<li>方式二不創建圖像數據所需內存，而是直接使用data所指內存，圖像的行步長由 step指定。<h2 id="二、常用變數"><a href="#二、常用變數" class="headerlink" title="二、常用變數:"></a>二、常用變數:</h2></li>
+<li>   int rows:像素陣列的列數。</li>
+<li>   int cols:像素陣列的行數。</li>
+<li>   uchar* data:uchar類型的指標，指向像素陣列的首個地址。</li>
+<li>   int dims:陣列的維度，以圖像來說為2。</li>
+</ol>
+<h2 id="三、-常用函數"><a href="#三、-常用函數" class="headerlink" title="三、    常用函數:"></a>三、    常用函數:</h2><ol>
+<li>   <code>int channels( )</code>:回傳通道數，1為灰度圖， 3為BGR圖， 4為BGRA圖(A為透明度)。</li>
+<li>   <code>int depth( )</code>:回傳一整數，用以表示像素的精度。<br>表一、depth()回傳的整數與像素資料型態的對應關係<br>|:8U=0:|:16U=2:|:32S=4:|:64F=6:|<br>|:8S=1:|:16S=3:|:32F=5:|:-:|</li>
+<li>   <code>int type( )</code>:回傳一整數，用以表示像素的資料型態。<br>表二、type()回傳的整數與Mat資料型態的對應關係<br>|-|:C1:|:C2:|:C3:|:C4:|<br>|:CV_8U:|:0:|:8:|:16:|:24:|<br>|:CV_8S:|:1:|:9:|:17:|:25:|<br>|:CV_16U:|:2:|:10:|:18:|:26:|<br>|:CV_16S:|:3:|:11:|:19:|:27:|<br>|:CV_32S:|:4:|:12:|:20:|:28:|<br>|:CV_32F:|:5:|:13:|:21:|:29:|<br>|:C_64F:|:6:|:14:|:22:|:30:|</li>
+<li>   <code>imread(const char path,int flag)</code>:會以flag所對應的讀取方式讀入path路徑的檔案，詳細見下面”從圖檔讀取內容”。</li>
+<li>   <code>step1()</code>:會回傳一列像素總共有幾筆資料，相當於cols*channel。</li>
+<li>   <code>Iscontinue()</code>:回傳像素是否連續<br>未完成:這是因為圖像資料每一行中有可能有空，或是0，例如以12位元存資料，但資料內容只有8位元，那就會有4位元為0。可以Iscontinue來檢查資料是否連續。</li>
+</ol>
+<h2 id="四、-像素的資料型態"><a href="#四、-像素的資料型態" class="headerlink" title="四、    像素的資料型態:"></a>四、    像素的資料型態:</h2><p>Mat宣告時，可以透過type來指定陣列的資料型態，命名方式為CV_(bit)(data type)C(channel)，bit代表矩陣中一個數值的位元數，data type代表矩陣中的數值類型，channel代表通道數。<br>表三、宣告Mat時使用的type與其陣列資料型態的對應關係<br>OpenCV Mat type    位元數    資料類型    資料類型變數名稱    通道數<br>CV_8UC1    8    無符號整數    unsigned char    1<br>CV_8SC3    8    有符號整數    char    3<br>CV_16UC3    16    無符號整數    unsigned short    3<br>CV_16SC3    16    有符號整數    short    3<br>CV_32SC3    32    有符號整數    signed int    3<br>CV_32FC3    32    浮點數    float    3<br>CV_64FC3    64    浮點數    double    3</p>
+<p>注意!這裡的type是指宣告時的其中一個引數，並不是函數介紹中傳回的數值。Mat物件實際上也沒有type變數可以供使用者調用，在宣告完成之後要改變像素資料型態，必須要透過covert的方式，暫不討論。</p>
+<h2 id="函式原型"><a href="#函式原型" class="headerlink" title="函式原型:"></a>函式原型:</h2><h2 id="範例-1"><a href="#範例-1" class="headerlink" title="範例:"></a>範例:</h2><h2 id="說明-1"><a href="#說明-1" class="headerlink" title="說明:"></a>說明:</h2><p>範例:<br>Mat img(400,800, CV_8UC3,Scalar(255, 255, 255));<br>說明:</p>
+<ol>
+<li>   第一個引數為列的像素數(高度)</li>
+<li>   第二個引數為行的像素數(寬度)</li>
+<li>   第三個引數影像型態使用CV_8UC3可以產生通道數3的影像，通道數3就是彩色圖</li>
+<li>   此物件有非常多種宣告方式，這是最基本的格式。</li>
+</ol>
+<p>函式原型:<br>Mat imread( const String&amp; filename, int flags = IMREAD_COLOR );<br>範例:<br>Mat imread( (“C:\Users\a2707\Desktop\S__19030095.jpg”);<br>說明：</p>
+<ol>
+<li>   第一個引數是檔案名稱。</li>
+<li>   第二個引數指定圖片的格式，可用的選項有三種：<br>cv2.IMREAD_COLOR:此為預設值，這種格式會讀取 RGB 三個 channels 的彩色圖片，而忽略透明度的 channel。<br>cv2.IMREAD_GRAYSCALE:以灰階的格式來讀取圖片。<br>cv2.IMREAD_UNCHANGED:讀取圖片中所有的 channels，包含透明度的 channel。<table>
+<thead>
+<tr>
+<th align="left">标题1</th>
+<th align="center">标题2</th>
+<th align="right">标题2</th>
+</tr>
+</thead>
+</table>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/jasonblog/c19cf1dd.html" data-id="ckz9dt7as0007ow7k2987ft5b" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GUI/" rel="tag">GUI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenCV/" rel="tag">OpenCV</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%96%8B%E7%99%BC%E5%87%BD%E5%BC%8F%E5%BA%AB/" rel="tag">開發函式庫</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-2022-01-31-OpneCV視窗基本指令" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/jasonblog/af587ea1.html" class="article-date">
@@ -163,7 +253,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/jasonblog/af587ea1.html" data-id="ckz8k3b7t0007ms7kb42wd16i" class="article-share-link">Share</a>
+      <a data-url="http://example.com/jasonblog/af587ea1.html" data-id="ckz9dt7au0008ow7ke1nydsdx" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GUI/" rel="tag">GUI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenCV/" rel="tag">OpenCV</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%96%8B%E7%99%BC%E5%87%BD%E5%BC%8F%E5%BA%AB/" rel="tag">開發函式庫</a></li></ul>
@@ -269,7 +359,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/jasonblog/45890dfd.html" data-id="ckz8k3b7m0003ms7kexk04qi3" class="article-share-link">Share</a>
+      <a data-url="http://example.com/jasonblog/45890dfd.html" data-id="ckz9dt7ao0003ow7ketq7db6z" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GUI/" rel="tag">GUI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenCV/" rel="tag">OpenCV</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%96%8B%E7%99%BC%E5%87%BD%E5%BC%8F%E5%BA%AB/" rel="tag">開發函式庫</a></li></ul>
@@ -342,7 +432,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/jasonblog/509bb444.html" data-id="ckz8k3b7f0001ms7k7kyp2yiy" class="article-share-link">Share</a>
+      <a data-url="http://example.com/jasonblog/509bb444.html" data-id="ckz9dt7aj0001ow7k00fb6app" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenCV/" rel="tag">OpenCV</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Visual-studio-2015/" rel="tag">Visual studio 2015</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AE%89%E8%A3%9D%E6%95%99%E5%AD%B8/" rel="tag">安裝教學</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%96%8B%E7%99%BC%E5%87%BD%E5%BC%8F%E5%BA%AB/" rel="tag">開發函式庫</a></li></ul>
@@ -385,6 +475,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/jasonblog/c19cf1dd.html">2022-02-05-OpneCV圖像格式</a>
+          </li>
         
           <li>
             <a href="/jasonblog/af587ea1.html">2022-01-31-OpneCV視窗基本指令</a>
