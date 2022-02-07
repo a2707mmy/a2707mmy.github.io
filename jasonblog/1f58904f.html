@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>2022-02-06-OpneCV獲取像素的RGB資料 | Show me the path</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="相關文章: 回顧過去 前途無量正文開始:  獲取特定像素的RGB資料Mat中的像素資料以陣列的方式儲存，有許多種不同的方式都可以操作陣列的內容。範例一及範例二的方式較適用於要操作特定像素點的值，使用上比較直觀但速度較慢，而範例三及範例四的方式較適用於對逐個像素操作、計算或讀取，使用上比較不直觀但速度較快 範例一(at法):img.at(y,x) [N]說明:     N對應的是第幾channel。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2022-02-06-OpneCV獲取像素的RGB資料">
+<meta property="og:url" content="http://example.com/jasonblog/1f58904f.html">
+<meta property="og:site_name" content="Show me the path">
+<meta property="og:description" content="相關文章: 回顧過去 前途無量正文開始:  獲取特定像素的RGB資料Mat中的像素資料以陣列的方式儲存，有許多種不同的方式都可以操作陣列的內容。範例一及範例二的方式較適用於要操作特定像素點的值，使用上比較直觀但速度較慢，而範例三及範例四的方式較適用於對逐個像素操作、計算或讀取，使用上比較不直觀但速度較快 範例一(at法):img.at(y,x) [N]說明:     N對應的是第幾channel。">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2022-02-06T05:47:22.000Z">
+<meta property="article:modified_time" content="2022-02-06T05:47:22.000Z">
+<meta property="article:author" content="Jason_Tsai">
+<meta property="article:tag" content="OpenCV">
+<meta property="article:tag" content="開發函式庫">
+<meta property="article:tag" content="GUI">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Show me the path</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首頁</a>
+        
+          <a class="main-nav-link" href="/about">關於本網站</a>
+        
+          <a class="main-nav-link" href="/archives">所有文章</a>
+        
+          <a class="main-nav-link" href="/tags">所有標籤</a>
+        
+          <a class="main-nav-link" href="/categories">所有分類</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜尋"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-2022-02-06-OpneCV獲取像素的RGB資料" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/jasonblog/1f58904f.html" class="article-date">
+  <time datetime="2022-02-06T05:47:22.000Z" itemprop="datePublished">2022-02-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Study-notes/">Study_notes</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      2022-02-06-OpneCV獲取像素的RGB資料
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="相關文章"><a href="#相關文章" class="headerlink" title="相關文章:"></a>相關文章:</h1><ol>
+<li>回顧過去</li>
+<li>前途無量<h1 id="正文開始"><a href="#正文開始" class="headerlink" title="正文開始:"></a>正文開始:</h1></li>
+</ol>
+<h1 id="獲取特定像素的RGB資料"><a href="#獲取特定像素的RGB資料" class="headerlink" title="獲取特定像素的RGB資料"></a>獲取特定像素的RGB資料</h1><p>Mat中的像素資料以陣列的方式儲存，有許多種不同的方式都可以操作陣列的內容。範例一及範例二的方式較適用於要操作特定像素點的值，使用上比較直觀但速度較慢，而範例三及範例四的方式較適用於對逐個像素操作、計算或讀取，使用上比較不直觀但速度較快</p>
+<h2 id="範例一-at法"><a href="#範例一-at法" class="headerlink" title="範例一(at法):"></a>範例一(at法):</h2><p>img.at<Vec3b>(y,x) [N]<br>說明:</p>
+<ol>
+<li>   N對應的是第幾channel。Vec3b(資料型態是CV_8UC3)的狀況下可以為0~2，0為Blue資料;1為Green資料;2為Red資料。</li>
+<li>   Vec3b適用於像素資料是unsign char 且有3通道的狀況(CV_8UC3)，舉例來說Vec2d適用於像素資料是double且有2通道的狀況(CV_64FC2)。使用此方法時特別需要注意這項參數及N和資料型態的配合是否一致。</li>
+<li>   Vec3b中的b代表uchar，若為s代表short，若為w代表ushort，若為i代表int，若為f代表float，若為d代表double。</li>
+<li>   注意!要操作座標(x,y)的像素，引數應輸入y,x。</li>
+</ol>
+<h2 id="範例二-at-point法"><a href="#範例二-at-point法" class="headerlink" title="範例二(at+point法):"></a>範例二(at+point法):</h2><p>Point point(X, Y)或Point point; point.x=……; point.y=……;<br>img.at<Vec3b>(point)[N]<br>說明:</p>
+<ol>
+<li>   Point為OpenCV中的一種物件，用來描述”點”，X為X座標，Y為Y座標。</li>
+<li>   img.at<Vec3b>(y,x)[N]= Number,可以直接修改特定像素的RGB值。</li>
+</ol>
+<h2 id="範例三-ptr法"><a href="#範例三-ptr法" class="headerlink" title="範例三(ptr法):"></a>範例三(ptr法):</h2><p>img.ptr<uchar>(i)[j*img.channels() +k] ;<br>說明:</p>
+<ol>
+<li>   img.ptr<uchar>(i)為第i列(橫向)資料中首個畫素的指標，而每一行資料有j行(縱向)個畫素，每個畫素又有k個資料。</li>
+<li>   以CU_8UC3的資料型態來說，資料排列方式為第j個畫素的B-&gt;第j個畫素的G-&gt;第j個畫素的R-&gt;第j+1個畫素的B-&gt;第j+1個畫素的G-&gt;第j+1個畫素的R……。</li>
+</ol>
+<h2 id="範例四-data法"><a href="#範例四-data法" class="headerlink" title="範例四(data法):"></a>範例四(data法):</h2><p><em>(((type</em>)img.data) +x *img.step1()+ y *img.channels()+k)<br>說明:</p>
+<ol>
+<li>   範例中是座標為(i,j)像素的第k個channel的值。</li>
+<li>   data為uchar<em>的一個指標，指向像素陣列的首個地址。無論資料型態是甚麼，data都是uchar</em>的指標。例如資料型態是CV_64FC3，那data並不會是float<em>的指標，而還是uchar</em>。</li>
+<li>   因此，若資料型態是CV_64FC3時，要用(float*)img.data，來把uchar<em>轉換成float</em>，再用*來取值。</li>
+<li>   用Step1()來計算行數，而不用cols*channels是考量到像素資料可能並非連續。</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/jasonblog/1f58904f.html" data-id="ckzcd8slp0009g87k3ynfe130" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GUI/" rel="tag">GUI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenCV/" rel="tag">OpenCV</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%96%8B%E7%99%BC%E5%87%BD%E5%BC%8F%E5%BA%AB/" rel="tag">開發函式庫</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/jasonblog/c19cf1dd.html" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">2022-02-05-OpneCV_Mat物件</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分類</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Study-notes/">Study_notes</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標籤</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/GUI/" rel="tag">GUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenCV/" rel="tag">OpenCV</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Visual-studio-2015/" rel="tag">Visual studio 2015</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E8%A3%9D%E6%95%99%E5%AD%B8/" rel="tag">安裝教學</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%96%8B%E7%99%BC%E5%87%BD%E5%BC%8F%E5%BA%AB/" rel="tag">開發函式庫</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/jasonblog/1f58904f.html">2022-02-06-OpneCV獲取像素的RGB資料</a>
+          </li>
+        
+          <li>
+            <a href="/jasonblog/c19cf1dd.html">2022-02-05-OpneCV_Mat物件</a>
+          </li>
+        
+          <li>
+            <a href="/jasonblog/af587ea1.html">2022-01-31-OpneCV視窗基本指令</a>
+          </li>
+        
+          <li>
+            <a href="/jasonblog/45890dfd.html">OpenCV 繪圖基本指令</a>
+          </li>
+        
+          <li>
+            <a href="/jasonblog/509bb444.html">Visual Studio 2015+OpenCV_安裝方法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 Jason_Tsai<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首頁</a>
+  
+    <a href="/about" class="mobile-nav-link">關於本網站</a>
+  
+    <a href="/archives" class="mobile-nav-link">所有文章</a>
+  
+    <a href="/tags" class="mobile-nav-link">所有標籤</a>
+  
+    <a href="/categories" class="mobile-nav-link">所有分類</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
