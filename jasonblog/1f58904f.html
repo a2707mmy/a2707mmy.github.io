@@ -7,15 +7,15 @@
   
   <title>2022-02-06-OpneCV獲取像素的RGB資料 | Show me the path</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="相關文章: 回顧過去 前途無量正文開始:  獲取特定像素的RGB資料Mat中的像素資料以陣列的方式儲存，有許多種不同的方式都可以操作陣列的內容。範例一及範例二的方式較適用於要操作特定像素點的值，使用上比較直觀但速度較慢，而範例三及範例四的方式較適用於對逐個像素操作、計算或讀取，使用上比較不直觀但速度較快 範例一(at法):img.at(y,x) [N]說明:     N對應的是第幾channel。">
+  <meta name="description" content="相關文章: 回顧過去 前途無量正文開始:本文紀錄如何獲取OpenCV中Mat物件的RGB資料。Mat中的像素資料以陣列的方式儲存，並且有許多種不同的方式都可以操作陣列的內容。範例一及範例二的方式較適用於要操作特定像素點的值，使用上比較直觀但速度較慢，而範例三及範例四的方式較適用於對逐個像素操作、計算或讀取，使用上比較不直觀但速度較快。你可以在這篇文章中學到以下內容: at法 at+poin法 pt">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2022-02-06-OpneCV獲取像素的RGB資料">
 <meta property="og:url" content="http://example.com/jasonblog/1f58904f.html">
 <meta property="og:site_name" content="Show me the path">
-<meta property="og:description" content="相關文章: 回顧過去 前途無量正文開始:  獲取特定像素的RGB資料Mat中的像素資料以陣列的方式儲存，有許多種不同的方式都可以操作陣列的內容。範例一及範例二的方式較適用於要操作特定像素點的值，使用上比較直觀但速度較慢，而範例三及範例四的方式較適用於對逐個像素操作、計算或讀取，使用上比較不直觀但速度較快 範例一(at法):img.at(y,x) [N]說明:     N對應的是第幾channel。">
+<meta property="og:description" content="相關文章: 回顧過去 前途無量正文開始:本文紀錄如何獲取OpenCV中Mat物件的RGB資料。Mat中的像素資料以陣列的方式儲存，並且有許多種不同的方式都可以操作陣列的內容。範例一及範例二的方式較適用於要操作特定像素點的值，使用上比較直觀但速度較慢，而範例三及範例四的方式較適用於對逐個像素操作、計算或讀取，使用上比較不直觀但速度較快。你可以在這篇文章中學到以下內容: at法 at+poin法 pt">
 <meta property="og:locale" content="zh_TW">
-<meta property="article:published_time" content="2022-02-06T05:47:22.000Z">
-<meta property="article:modified_time" content="2022-02-06T05:47:22.000Z">
+<meta property="article:published_time" content="2022-02-07T05:47:22.000Z">
+<meta property="article:modified_time" content="2022-02-07T05:47:22.000Z">
 <meta property="article:author" content="Jason_Tsai">
 <meta property="article:tag" content="OpenCV">
 <meta property="article:tag" content="開發函式庫">
@@ -74,7 +74,7 @@
         <section id="main"><article id="post-2022-02-06-OpneCV獲取像素的RGB資料" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/jasonblog/1f58904f.html" class="article-date">
-  <time datetime="2022-02-06T05:47:22.000Z" itemprop="datePublished">2022-02-06</time>
+  <time datetime="2022-02-07T05:47:22.000Z" itemprop="datePublished">2022-02-07</time>
 </a>
     
   <div class="article-category">
@@ -99,38 +99,39 @@
       
         <h1 id="相關文章"><a href="#相關文章" class="headerlink" title="相關文章:"></a>相關文章:</h1><ol>
 <li>回顧過去</li>
-<li>前途無量<h1 id="正文開始"><a href="#正文開始" class="headerlink" title="正文開始:"></a>正文開始:</h1></li>
+<li>前途無量<h1 id="正文開始"><a href="#正文開始" class="headerlink" title="正文開始:"></a>正文開始:</h1>本文紀錄如何獲取OpenCV中Mat物件的RGB資料。<br>Mat中的像素資料以陣列的方式儲存，並且有許多種不同的方式都可以操作陣列的內容。範例一及範例二的方式較適用於要操作特定像素點的值，使用上比較直觀但速度較慢，而範例三及範例四的方式較適用於對逐個像素操作、計算或讀取，使用上比較不直觀但速度較快。<br>你可以在這篇文章中學到以下內容:</li>
+<li>at法</li>
+<li>at+poin法</li>
+<li>ptr法</li>
+<li>data法</li>
 </ol>
-<h1 id="獲取特定像素的RGB資料"><a href="#獲取特定像素的RGB資料" class="headerlink" title="獲取特定像素的RGB資料"></a>獲取特定像素的RGB資料</h1><p>Mat中的像素資料以陣列的方式儲存，有許多種不同的方式都可以操作陣列的內容。範例一及範例二的方式較適用於要操作特定像素點的值，使用上比較直觀但速度較慢，而範例三及範例四的方式較適用於對逐個像素操作、計算或讀取，使用上比較不直觀但速度較快</p>
-<h2 id="範例一-at法"><a href="#範例一-at法" class="headerlink" title="範例一(at法):"></a>範例一(at法):</h2><p>img.at<Vec3b>(y,x) [N]<br>說明:</p>
-<ol>
-<li>   N對應的是第幾channel。Vec3b(資料型態是CV_8UC3)的狀況下可以為0~2，0為Blue資料;1為Green資料;2為Red資料。</li>
-<li>   Vec3b適用於像素資料是unsign char 且有3通道的狀況(CV_8UC3)，舉例來說Vec2d適用於像素資料是double且有2通道的狀況(CV_64FC2)。使用此方法時特別需要注意這項參數及N和資料型態的配合是否一致。</li>
-<li>   Vec3b中的b代表uchar，若為s代表short，若為w代表ushort，若為i代表int，若為f代表float，若為d代表double。</li>
-<li>   注意!要操作座標(x,y)的像素，引數應輸入y,x。</li>
-</ol>
-<h2 id="範例二-at-point法"><a href="#範例二-at-point法" class="headerlink" title="範例二(at+point法):"></a>範例二(at+point法):</h2><p>Point point(X, Y)或Point point; point.x=……; point.y=……;<br>img.at<Vec3b>(point)[N]<br>說明:</p>
-<ol>
+<h2 id="範例一-at法"><a href="#範例一-at法" class="headerlink" title="範例一(at法):"></a>範例一(at法):</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">img.at&lt;Vec3b&gt;(y,x) [N]</span><br></pre></td></tr></table></figure>
+<h2 id="說明"><a href="#說明" class="headerlink" title="說明:"></a>說明:</h2><ol>
+<li>N對應的是第幾channel。Vec3b(資料型態是CV_8UC3)的狀況下可以為0~2，0為Blue資料;1為Green資料;2為Red資料。</li>
+<li>Vec3b適用於像素資料是unsign char 且有3通道的狀況(CV_8UC3)，舉例來說Vec2d適用於像素資料是double且有2通道的狀況(CV_64FC2)。<br>使用此方法時特別需要注意這項參數及N和img的資料型態的配合是否一致。</li>
+<li>Vec3b中的b代表uchar，若為s代表short，若為w代表ushort，若為i代表int，若為f代表float，若為d代表double。</li>
+<li><code>img.at&lt;Vec3b&gt;(y,x)[N]= Number</code>,可以直接修改特定像素的RGB值。</li>
+<li>注意!要操作座標(x,y)的像素，引數應輸入y,x。<h2 id="範例二-at-point法"><a href="#範例二-at-point法" class="headerlink" title="範例二(at+point法):"></a>範例二(at+point法):</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Point <span class="title">point</span><span class="params">(X, Y)</span>或Point point</span>; point.x=……; point.y=……;</span><br><span class="line">img.at&lt;Vec3b&gt;(point)[N]</span><br></pre></td></tr></table></figure>
+<h2 id="說明-1"><a href="#說明-1" class="headerlink" title="說明:"></a>說明:</h2></li>
 <li>   Point為OpenCV中的一種物件，用來描述”點”，X為X座標，Y為Y座標。</li>
-<li>   img.at<Vec3b>(y,x)[N]= Number,可以直接修改特定像素的RGB值。</li>
 </ol>
-<h2 id="範例三-ptr法"><a href="#範例三-ptr法" class="headerlink" title="範例三(ptr法):"></a>範例三(ptr法):</h2><p>img.ptr<uchar>(i)[j*img.channels() +k] ;<br>說明:</p>
-<ol>
-<li>   img.ptr<uchar>(i)為第i列(橫向)資料中首個畫素的指標，而每一行資料有j行(縱向)個畫素，每個畫素又有k個資料。</li>
+<h2 id="範例三-ptr法"><a href="#範例三-ptr法" class="headerlink" title="範例三(ptr法):"></a>範例三(ptr法):</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">img.ptr&lt;uchar&gt;(i)[j*img.<span class="built_in">channels</span>() +k] ;</span><br></pre></td></tr></table></figure>
+<h2 id="說明-2"><a href="#說明-2" class="headerlink" title="說明:"></a>說明:</h2><ol>
+<li>   <code>img.ptr&lt;uchar&gt;(i)</code>為第i列(橫向)資料中首個畫素的指標，而每一行資料有j行(縱向)個畫素，每個畫素又有k個資料。</li>
 <li>   以CU_8UC3的資料型態來說，資料排列方式為第j個畫素的B-&gt;第j個畫素的G-&gt;第j個畫素的R-&gt;第j+1個畫素的B-&gt;第j+1個畫素的G-&gt;第j+1個畫素的R……。</li>
 </ol>
-<h2 id="範例四-data法"><a href="#範例四-data法" class="headerlink" title="範例四(data法):"></a>範例四(data法):</h2><p><em>(((type</em>)img.data) +x *img.step1()+ y *img.channels()+k)<br>說明:</p>
-<ol>
+<h2 id="範例四-data法"><a href="#範例四-data法" class="headerlink" title="範例四(data法):"></a>範例四(data法):</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*(((type*)img.data) +x *img.<span class="built_in">step1</span>()+ y *img.<span class="built_in">channels</span>()+k)</span><br></pre></td></tr></table></figure>
+<h2 id="說明-3"><a href="#說明-3" class="headerlink" title="說明:"></a>說明:</h2><ol>
 <li>   範例中是座標為(i,j)像素的第k個channel的值。</li>
-<li>   data為uchar<em>的一個指標，指向像素陣列的首個地址。無論資料型態是甚麼，data都是uchar</em>的指標。例如資料型態是CV_64FC3，那data並不會是float<em>的指標，而還是uchar</em>。</li>
-<li>   因此，若資料型態是CV_64FC3時，要用(float*)img.data，來把uchar<em>轉換成float</em>，再用*來取值。</li>
+<li>   <code>data為uchar*</code>的一個指標，指向像素陣列的首個地址。無論資料型態是甚麼，data都是<code>uchar*</code>的指標。例如資料型態是CV_64FC3，那data並不會是<code>float*</code>的指標，而還是uchar*。</li>
+<li>   因此，若資料型態是CV_64FC3時，要用<code>(float*)img.data</code>，來把<code>uchar*</code>轉換成float<em>，再用</em>來取值。</li>
 <li>   用Step1()來計算行數，而不用cols*channels是考量到像素資料可能並非連續。</li>
 </ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/jasonblog/1f58904f.html" data-id="ckzcd8slp0009g87k3ynfe130" class="article-share-link">Share</a>
+      <a data-url="http://example.com/jasonblog/1f58904f.html" data-id="ckzceepvd000xwk7k2myqarog" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GUI/" rel="tag">GUI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenCV/" rel="tag">OpenCV</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%96%8B%E7%99%BC%E5%87%BD%E5%BC%8F%E5%BA%AB/" rel="tag">開發函式庫</a></li></ul>
