@@ -8,12 +8,12 @@
   
   <title>2022-02-06-OpneCV獲取像素的RGB資料 | Show me the path</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="相關文章: 回顧過去 前途無量正文開始:本文紀錄如何獲取OpenCV中Mat物件的RGB資料。Mat中的像素資料以陣列的方式儲存，並且有許多種不同的方式都可以操作陣列的內容。範例一及範例二的方式較適用於要操作特定像素點的值，使用上比較直觀但速度較慢，而範例三及範例四的方式較適用於對逐個像素操作、計算或讀取，使用上比較不直觀但速度較快。你可以在這篇文章中學到以下內容: at法 at+poin法 pt">
+  <meta name="description" content="相關文章: 回顧過去 前途無量正文開始:本文紀錄如何獲取OpenCV中Mat物件的RGB資料。Mat中的像素資料以陣列的方式儲存，並且有許多種不同的方式都可以操作陣列的內容。範例一及範例二的方式較適用於要操作特定像素點的值，使用上比較直觀但速度較慢，而範例三及範例四的方式較適用於對逐個像素操作、計算或讀取，使用上比較不直觀但速度較快。  你可以在這篇文章中學到以下內容:  at法 at+poin法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2022-02-06-OpneCV獲取像素的RGB資料">
 <meta property="og:url" content="http://example.com/jasonblog/1f58904f.html">
 <meta property="og:site_name" content="Show me the path">
-<meta property="og:description" content="相關文章: 回顧過去 前途無量正文開始:本文紀錄如何獲取OpenCV中Mat物件的RGB資料。Mat中的像素資料以陣列的方式儲存，並且有許多種不同的方式都可以操作陣列的內容。範例一及範例二的方式較適用於要操作特定像素點的值，使用上比較直觀但速度較慢，而範例三及範例四的方式較適用於對逐個像素操作、計算或讀取，使用上比較不直觀但速度較快。你可以在這篇文章中學到以下內容: at法 at+poin法 pt">
+<meta property="og:description" content="相關文章: 回顧過去 前途無量正文開始:本文紀錄如何獲取OpenCV中Mat物件的RGB資料。Mat中的像素資料以陣列的方式儲存，並且有許多種不同的方式都可以操作陣列的內容。範例一及範例二的方式較適用於要操作特定像素點的值，使用上比較直觀但速度較慢，而範例三及範例四的方式較適用於對逐個像素操作、計算或讀取，使用上比較不直觀但速度較快。  你可以在這篇文章中學到以下內容:  at法 at+poin法">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2022-02-07T05:47:22.000Z">
 <meta property="article:modified_time" content="2022-02-07T05:47:22.000Z">
@@ -100,7 +100,10 @@
       
         <h1 id="相關文章"><a href="#相關文章" class="headerlink" title="相關文章:"></a>相關文章:</h1><ol>
 <li>回顧過去</li>
-<li>前途無量<h1 id="正文開始"><a href="#正文開始" class="headerlink" title="正文開始:"></a>正文開始:</h1>本文紀錄如何獲取OpenCV中Mat物件的RGB資料。<br>Mat中的像素資料以陣列的方式儲存，並且有許多種不同的方式都可以操作陣列的內容。範例一及範例二的方式較適用於要操作特定像素點的值，使用上比較直觀但速度較慢，而範例三及範例四的方式較適用於對逐個像素操作、計算或讀取，使用上比較不直觀但速度較快。<br>你可以在這篇文章中學到以下內容:</li>
+<li>前途無量<h1 id="正文開始"><a href="#正文開始" class="headerlink" title="正文開始:"></a>正文開始:</h1>本文紀錄如何獲取OpenCV中Mat物件的RGB資料。<br>Mat中的像素資料以陣列的方式儲存，並且有許多種不同的方式都可以操作陣列的內容。範例一及範例二的方式較適用於要操作特定像素點的值，使用上比較直觀但速度較慢，而範例三及範例四的方式較適用於對逐個像素操作、計算或讀取，使用上比較不直觀但速度較快。</li>
+</ol>
+<p>你可以在這篇文章中學到以下內容:</p>
+<ol>
 <li>at法</li>
 <li>at+poin法</li>
 <li>ptr法</li>
