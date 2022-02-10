@@ -7,10 +7,12 @@
   
   <title>Show me the path</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
+  <meta name="description" content="a2707mmy">
+<meta property="og:type" content="website">
 <meta property="og:title" content="Show me the path">
 <meta property="og:url" content="http://example.com/index.html">
 <meta property="og:site_name" content="Show me the path">
+<meta property="og:description" content="a2707mmy">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:author" content="Jason_Tsai">
 <meta name="twitter:card" content="summary">
@@ -65,6 +67,90 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-2022-02-10-C與C-中的String" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/jasonblog/dcb1ae55.html" class="article-date">
+  <time datetime="2022-02-10T08:18:02.000Z" itemprop="datePublished">2022-02-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Study-notes/">Study_notes</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/jasonblog/dcb1ae55.html">C與C++中的String</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="相關文章"><a href="#相關文章" class="headerlink" title="相關文章:"></a>相關文章:</h1><ol>
+<li>回顧過去</li>
+<li>前途無量</li>
+</ol>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言:"></a>前言:</h1><p>某日在網路上閒閒的亂滑文章，滑到一篇關於String的文章，我一直以來都學不太會的String變數。希望透過這次學習了解String變數的資料結構以及使用方法。本文內容大量參考”參考資料”中的內容，可以說只有翻譯了原文。若喜歡內容請到該網站支持，若有侵權請透過mail聯繫我。</p>
+<p>你可以在本文中學到:</p>
+<ol>
+<li>C語言風格的string</li>
+<li>C++語言標準的string</li>
+</ol>
+<h1 id="正文開始"><a href="#正文開始" class="headerlink" title="正文開始:"></a>正文開始:</h1><p>了解String對於你想有效率的儲存文字、操作文字、從鍵盤接收輸入和輸出非常重要。本文會告訴你所有關於C++ String 你需要知道的內容。</p>
+<h1 id="甚麼是String"><a href="#甚麼是String" class="headerlink" title="甚麼是String"></a>甚麼是String</h1><p>String本質上是characters的集合，舉例來說像是:”Hello World”,”My name is Jason”，他們被雙引號””括起來。<br>在C++中，我們有兩種String:</p>
+<ol>
+<li>C語言風格的String</li>
+<li>std::string，C++標準string 類別<br>你可以透過他們提供的小函式創造自己的string類別，但這不是本文要討論的。</li>
+</ol>
+<h1 id="C語言風格的String"><a href="#C語言風格的String" class="headerlink" title="C語言風格的String"></a>C語言風格的String</h1><p>從C語言中誕生的String在C++中也支援，這些”characters的集合”儲存成char的陣列，並且以null-terminated  \0  為結尾。</p>
+<h2 id="如何宣告C語言風格的String"><a href="#如何宣告C語言風格的String" class="headerlink" title="如何宣告C語言風格的String"></a>如何宣告C語言風格的String</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> str[]=<span class="string">&quot;c string&quot;</span>;</span><br></pre></td></tr></table></figure>
+<p>這裡str是一個長度為9的char陣列(多一是因為編譯氣添加的\0)<br>還有其他方法來宣告</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> str[<span class="number">9</span>]=<span class="string">&quot;c string&quot;</span>;</span><br><span class="line"><span class="keyword">char</span> str[]=&#123;<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27; &#x27;</span>,<span class="string">&#x27;s&#x27;</span>,<span class="string">&#x27;t&#x27;</span>,<span class="string">&#x27;r&#x27;</span>,<span class="string">&#x27;i&#x27;</span>,<span class="string">&#x27;n&#x27;</span>,<span class="string">&#x27;g&#x27;</span>,<span class="string">&#x27;\0&#x27;</span>&#125;;</span><br><span class="line"><span class="keyword">char</span> str[<span class="number">9</span>]=&#123;<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27; &#x27;</span>,<span class="string">&#x27;s&#x27;</span>,<span class="string">&#x27;t&#x27;</span>,<span class="string">&#x27;r&#x27;</span>,<span class="string">&#x27;i&#x27;</span>,<span class="string">&#x27;n&#x27;</span>,<span class="string">&#x27;g&#x27;</span>,<span class="string">&#x27;\0&#x27;</span>&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="如何傳遞C語言風格的String到副程式中"><a href="#如何傳遞C語言風格的String到副程式中" class="headerlink" title="如何傳遞C語言風格的String到副程式中"></a>如何傳遞C語言風格的String到副程式中</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">char</span> str[] = <span class="string">&quot;This is a C-style string&quot;</span>;</span><br><span class="line">    <span class="built_in">display</span>(str);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// C-style strings can be passed to functions as follows:</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">display</span><span class="params">(<span class="keyword">char</span> str[])</span> </span>&#123;</span><br><span class="line">    std::cout &lt;&lt; str &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="如何在C-中使用C語言風格的string"><a href="#如何在C-中使用C語言風格的string" class="headerlink" title="如何在C++中使用C語言風格的string"></a>如何在C++中使用C語言風格的string</h2><p>C標準函式庫提供了幾個方便的函式讓你可以操作string，雖然不廣泛的推薦使用(原因見下文)，你仍可以透過include csrting 標頭檔來使用他們:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span> <span class="comment">// required</span></span></span><br><span class="line"></span><br><span class="line"><span class="number">1.</span> <span class="built_in">strcpy</span>(s1,s2) --&gt; Copies string s2 into string s1.                 </span><br><span class="line"><span class="number">2.</span> <span class="built_in">strcat</span>(s1,s2) --&gt; Concatenates string s2 onto the end of string s1</span><br><span class="line"><span class="number">3.</span> <span class="built_in">strlen</span>(s1)    --&gt; Returns the length of string s1         </span><br><span class="line"><span class="number">4.</span> <span class="built_in">strcmp</span>(s1,s2) --&gt; Returns <span class="number">0</span> <span class="keyword">if</span> s1==s2; less than <span class="number">0</span> <span class="keyword">if</span> s1&lt;s2; greater than <span class="number">0</span> <span class="keyword">if</span> s1&gt;s2</span><br><span class="line"><span class="number">5.</span> <span class="built_in">strchr</span>(s1,ch) --&gt; Returns a pointer to the first occurrence of character ch in string s1</span><br><span class="line"><span class="number">6.</span> <span class="built_in">strstr</span>(s1,s2) --&gt; Returns a pointer to the first string s2 in string s1      </span><br></pre></td></tr></table></figure>
+
+<h1 id="C-標準sting-std-string"><a href="#C-標準sting-std-string" class="headerlink" title="C++標準sting  std::string"></a>C++標準sting  std::string</h1><p>C語言風的string並不安全，如果他的陣列結尾不是\0的話會導致大量潛在問題。<br>例如:緩衝區溢位(buffer overflows)是這<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/312570/what-are-some-of-the-drawbacks-to-using-c-style-strings">一堆問題中</a>常見的，這就是為什麼C++開發者不推薦使用C語言風格的string。</p>
+<p>由C++標準程式庫提供的std::string是更安全的替代方案。</p>
+<h2 id="如何宣告-std-string"><a href="#如何宣告-std-string" class="headerlink" title="如何宣告 std::string"></a>如何宣告 std::string</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span> </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span> <span class="comment">// the C++ Standard String Class</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    std::string str = <span class="string">&quot;C++ String&quot;</span>;</span><br><span class="line">    std::cout &lt;&lt; str &lt;&lt; <span class="string">&quot;\n&quot;</span>; <span class="comment">// prints `C++ String`&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>C語言風格的sting和C++語言的string最大的差別在於string的長度，如果你想要知道C語言風格的string長度，你每次都需要使用<code>strlen()</code></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span> <span class="comment">// required to use `strlen`</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">char</span> str[] = <span class="string">&quot;hello world&quot;</span>;</span><br><span class="line">    std::cout &lt;&lt; <span class="built_in">strlen</span>(str) &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果你不將這長度儲存在變數中，但你又需要多次的用到他，你可以顯而易見這對程式所造成的成本。<br>而C++的string內鍵包含了長度的屬性，你只需要以<code>.lenght()</code>就可以獲得:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span> <span class="comment">// required to use `std::string`</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    std::string str = <span class="string">&quot;freeCodeCamp&quot;</span>;</span><br><span class="line">    std::cout &lt;&lt; str.<span class="built_in">length</span>() &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>簡單且乾淨俐落，重要的是節省了計算成本。<br>並且這不是唯一的優點，以下是一些它的好處。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   std::string str = <span class="string">&quot;freeCodeCamp&quot;</span>;</span><br><span class="line">   </span><br><span class="line">   <span class="comment">// Inserting a single character into `str`</span></span><br><span class="line">   str.<span class="built_in">push_back</span>(<span class="string">&#x27;s&#x27;</span>);</span><br><span class="line">   std::cout &lt;&lt; str &lt;&lt; <span class="string">&quot;\n&quot;</span>; <span class="comment">// `str` is now `freeCodeCamps`</span></span><br><span class="line">   </span><br><span class="line">   <span class="comment">// Deleting the last character from `str`</span></span><br><span class="line">   str.<span class="built_in">pop_back</span>();</span><br><span class="line">   std::cout &lt;&lt; str &lt;&lt; <span class="string">&quot;\n&quot;</span>; <span class="comment">// `str` is now `freeCodeCamp`</span></span><br><span class="line">   </span><br><span class="line">   <span class="comment">// Resizing a string</span></span><br><span class="line">   str.<span class="built_in">resize</span>(<span class="number">13</span>);</span><br><span class="line">   std::cout &lt;&lt; str &lt;&lt; <span class="string">&quot;\n&quot;</span>; </span><br><span class="line">   </span><br><span class="line">   <span class="comment">// Decreasing excess capacity of the string</span></span><br><span class="line">   str.<span class="built_in">shrink_to_fit</span>()</span><br><span class="line">   std::cout &lt;&lt; str &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="如何傳遞C-的std-string到副程式中"><a href="#如何傳遞C-的std-string到副程式中" class="headerlink" title="如何傳遞C+的std::string到副程式中"></a>如何傳遞C+的std::string到副程式中</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    std::string str = <span class="string">&quot;This is a C-style string&quot;</span>;</span><br><span class="line">    <span class="built_in">display</span>(str);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Passing `std::string`s are as you would normally pass a regular object</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">display</span><span class="params">(std::string str)</span> </span>&#123;</span><br><span class="line">    std::cout &lt;&lt; str &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="何時會選擇用C語言風格string而不是std-string"><a href="#何時會選擇用C語言風格string而不是std-string" class="headerlink" title="何時會選擇用C語言風格string而不是std::string"></a>何時會選擇用C語言風格string而不是std::string</h1><p>到此，應該可以顯而易見C++的string比起c語言的string來說有太多好處，最大的好處就是自動管理了記憶體，不過有時你可能還是會採用c語言的string</p>
+<ol>
+<li>如果你是C語言背景的，或許使用C語言會對你比較方便。</li>
+<li>std::string儘管有不少好處，但相對來說這結構很複雜。如果你不知道你自己在做什麼操作，他很快就會變得非常複雜。另外他使用了大量的記憶體，對你的程式來說並不好。</li>
+<li>如果你非常小心的編輯的你程式，當你使用完就釋放記憶體，C語言的string相對來說又輕又快，在效率上具有優勢。</li>
+</ol>
+<h1 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料:"></a>參考資料:</h1><p><a target="_blank" rel="noopener" href="https://www.freecodecamp.org/news/c-string-std-string-example-in-cpp/">C++ String – std::string Example in C++</a><br>原作者:<a target="_blank" rel="noopener" href="https://www.freecodecamp.org/news/author/jasmcaus/">Jason Dsouza</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/jasonblog/dcb1ae55.html" data-id="ckzgylatk0000vk7k3xevcz1u" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/String/" rel="tag">String</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-2022-02-06-OpneCV獲取像素的RGB資料" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -534,7 +620,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">標籤</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/GUI/" rel="tag">GUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenCV/" rel="tag">OpenCV</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Visual-studio-2015/" rel="tag">Visual studio 2015</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E8%A3%9D%E6%95%99%E5%AD%B8/" rel="tag">安裝教學</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%96%8B%E7%99%BC%E5%87%BD%E5%BC%8F%E5%BA%AB/" rel="tag">開發函式庫</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GUI/" rel="tag">GUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenCV/" rel="tag">OpenCV</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/String/" rel="tag">String</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Visual-studio-2015/" rel="tag">Visual studio 2015</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E8%A3%9D%E6%95%99%E5%AD%B8/" rel="tag">安裝教學</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%96%8B%E7%99%BC%E5%87%BD%E5%BC%8F%E5%BA%AB/" rel="tag">開發函式庫</a></li></ul>
     </div>
   </div>
 
@@ -545,6 +631,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/jasonblog/dcb1ae55.html">C與C++中的String</a>
+          </li>
         
           <li>
             <a href="/jasonblog/1f58904f.html">2022-02-06-OpneCV獲取像素的RGB資料</a>
@@ -560,10 +650,6 @@
         
           <li>
             <a href="/jasonblog/45890dfd.html">OpenCV 繪圖基本指令</a>
-          </li>
-        
-          <li>
-            <a href="/jasonblog/509bb444.html">Visual Studio 2015+OpenCV_安裝方法</a>
           </li>
         
       </ul>
